@@ -1,4 +1,4 @@
-import { computed, reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useAccountStore = defineStore("account", () => {
@@ -12,5 +12,4 @@ export const useAccountStore = defineStore("account", () => {
     const setLoggedIn = val => state.loggedIn = val;
 
     return { state, setChecked, setLoggedIn };
-    
 });

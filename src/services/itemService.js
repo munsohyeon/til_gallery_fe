@@ -1,6 +1,6 @@
-import axios from '@/services/httpRequest';
+import axios from 'axios';
 axios.defaults.baseURL = '/api/v1';
 
-export const getItem = () => {
-    return axios.Axios.get('/item').catch(e => e.response);
+export const getItems = () => {
+    return axios.get('/item').catch(e => e.response); 
 }
