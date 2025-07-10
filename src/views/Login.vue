@@ -48,5 +48,14 @@ const submit = async () => {
 </template>
 
 <style scoped>
+@font-face {
+    font-family: 'PyeojinGothic-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+* {
+    font-family: 'PyeojinGothic-Bold';
+}
 .container { max-width: 576px; }
 </style>

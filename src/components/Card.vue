@@ -2,6 +2,8 @@
 import { computed } from 'vue';
 import { addItem } from '@/services/cartService';
 import { useAccountStore } from '@/stores/account';
+import { useRouter } from 'vue-router';
+
 
 const props = defineProps({
     item: {
@@ -17,15 +19,25 @@ const computedItemDiscountPrice = computed(() => (props.item.price * ((100 - pro
 
 const account = useAccountStore();
 
+const router = useRouter(); 
+
 const put = async () => { 
     if (!account.state.loggedIn) {
         alert('로그인 후 다시 시도해주세요');
         return;
-    } else {
-        const res = await addItem(props.item.id);
-        console.log('장바구니 담기 성공!')
     }
-}
+    const res = await addItem(props.item.id);
+    if (res === undefined) {
+        alert('서버에 문제가 있습니다.');
+        return;
+    } else if (res.status === 500) {
+        alert('이미 장바구니에 담겨져 있습니다.');
+    } else if (res.status === 200 && confirm('장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?')) {
+            // 장바구니 화면으로 라우팅
+            console.log('장바구니 담기 성공!')
+            router.push('/cart');
+        }
+    }
 
 </script>
 
@@ -53,6 +65,15 @@ const put = async () => {
 </template>
 
 <style lang="scss" scoped>
+@font-face {
+    font-family: 'PyeojinGothic-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+* {
+    font-family: 'PyeojinGothic-Bold';
+}
 .card {
     .img {
         display: inline-block;
