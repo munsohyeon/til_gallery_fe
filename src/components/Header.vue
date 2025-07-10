@@ -18,7 +18,7 @@ const logoutAccount = async () => {
 
 <template>
     <header>
-        <div class="navbar navbar-dark bg-dark text-white shadow-sm">
+        <div class="navbar custom-navbar text-white shadow-sm">
             <div class="container">
                 <router-link to="/" class="navbar-brand">
                     <strong>Gallery</strong>
@@ -49,13 +49,25 @@ const logoutAccount = async () => {
 * {
     font-family: 'PyeojinGothic-Bold';
 }
+
 header {
+    .custom-navbar {
+    background: linear-gradient(135deg, #FFF);
+    padding: 10px 0;
+    .navbar-brand {
+      color: #558BCF !important;
+
+      &:hover {
+        color: #0962cf !important
+      }
+  }
     .menus {
         a {        
             cursor: pointer;                
-            color: #fff;
+            color: #558BCF;
             text-decoration: none;
         }
     }
+}
 }
 </style>

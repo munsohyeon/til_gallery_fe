@@ -51,7 +51,7 @@ const put = async () => {
                 <!-- 상품 이름 -->
                 <span class="me-2">{{  props.item.name }}</span>
                 <!-- 상품 할인율 -->
-                <span class="discount badge bg-danger">{{ props.item.discountPer }}%</span>
+                <span class="discount badge ">{{ props.item.discountPer }}%</span>
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <button class="btn btn-primary btn-sm" @click="put">장바구니 담기</button>
@@ -75,16 +75,48 @@ const put = async () => {
     font-family: 'PyeojinGothic-Bold';
 }
 .card {
-    .img {
-        display: inline-block;
-        width: 100%;
-        height: 250px;
-        background-size: cover;
-        background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+
+  .img {
+    display: inline-block;
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-body {
+    .price {
+      text-decoration: line-through;
     }
 
-    .card-body .price {
-        text-decoration: line-through;
+    .discount {
+      animation: soft-glow 2s ease-in-out infinite;
+      box-shadow: 0 0 0px rgba(255, 0, 0, 0.5); // 시작은 거의 없음
     }
+  }
 }
+
+.discount {
+  background-color: tomato;
+  color: white;
+  animation: soft-glow 2s ease-in-out infinite;
+  box-shadow: 0 0 0px rgba(255, 99, 71, 0.5); // tomato의 rgba
+}
+
+
+@keyframes soft-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(255, 0, 0, 0.5);
+  }
+}
+
+
 </style>

@@ -1,6 +1,8 @@
 <script setup>
-import { computed, reactive } from 'vue';
+import { getItems } from '@/services/cartService.js';
+import { computed, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { addOrder } from '@/services/orderService';
 
 const router = useRouter();
 
@@ -10,15 +12,43 @@ const state = reactive({
         name: '',
         address: '',
         payment: 'card',
-        cardNumber: ''
+      cardNumber: '',
+        itemIds: []
     }
 });
 
-const submit = () => {
-
+const submit = async () => {
+  if (state.form.payment !== 'card') { // 결제수단이 카드가 아니라면
+    // 카드번호를 지운다.
+    state.form.cardNumber = '';
+  }
+  // id값을 순차적으로 넣어주세요
+  state.form.itemIds = state.items.map(i => i.itemId);
+  const res = await addOrder(state.form);
 }
 
-const computedTotalPrice = computed(() => ' 100,000');
+onMounted(async () => {
+  const res = await getItems();
+  if (res === undefined || res.status !== 200) {
+    return;
+  }
+  state.items = res.data;
+})
+
+const computedTotalPrice = computed(() => {
+  // return state.items.reduce((acc, item) => {
+  //   const discountedPrice = item.price * (1 - item.discountPer / 100);
+  //   return acc + discountedPrice;
+  // }, 0);
+  let result = 0;
+  state.items.forEach((i) => {
+    result += i.price - i.price * i.discountPer / 100;
+  });
+  
+  return result;
+});
+
+
 </script>
 
 <template>
@@ -62,7 +92,7 @@ const computedTotalPrice = computed(() => ' 100,000');
                 ⏰ 마감임박!
               </div>
             <div class="border p-4 bg-light h5 rounded text-center total-price">
-              <span>합계</span>
+              <span>합계 </span>
               <b>{{ computedTotalPrice.toLocaleString() }}원</b>
             </div>
             <button type="submit" class="w-100 btn btn-primary py-4 mt-4">
@@ -117,7 +147,7 @@ const computedTotalPrice = computed(() => ' 100,000');
                   value="bank"
                   v-model="state.form.payment"
                 />
-                <label class="form-check-label" for="bank">무통장입금</label>
+                <label class="form-check-label" for="bank">무통장 입금</label>
               </div>
             </div>
             <div class="pt-1" v-if="state.form.payment === 'card'">

@@ -69,7 +69,7 @@ onMounted(() => {
                     <div>
                     </div>
                     <div class="act d-flex justify-content-between">
-                    <button @click="clear" class="btn btn-danger">장바구니 비우기</button>
+                    <button @click="clear" class="btn" id="cartBox">장바구니 비우기</button>
                     <router-link to="/order" class="btn btn-primary">주문하기</router-link>
                 </div>
             </template>
@@ -189,6 +189,10 @@ onMounted(() => {
     padding: 15px 30px;
     font-size: 18px;
     border-radius: 8px;
+  }
+  #cartBox {
+    background-color: #FFC40C;
+    color: #FFF;
   }
 }
 
