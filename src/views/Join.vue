@@ -63,13 +63,13 @@ const submit = async () => {
 
 <style lang="scss" scoped>
 @font-face {
-    font-family: 'PyeojinGothic-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
-    font-weight: 700;
+    font-family: 'LeeSeoyun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 * {
-    font-family: 'PyeojinGothic-Bold';
+    font-family: 'LeeSeoyun';
 }
 .container {
   max-width: 576px;

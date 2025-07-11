@@ -49,7 +49,7 @@ const put = async () => {
          <div class="card-body">
             <p class="card-text">
                 <!-- 상품 이름 -->
-                <span class="me-2">{{  props.item.name }}</span>
+                <span class="me-2 item-name">{{  props.item.name }}</span>
                 <!-- 상품 할인율 -->
                 <span class="discount badge ">{{ props.item.discountPer }}%</span>
             </p>
@@ -58,7 +58,7 @@ const put = async () => {
                 <!-- 상품 정가 (숫자 데이터에 3자리마라 쉼표 표기 >> 천단위 콤마) -->
                 <small class="price text-muted">{{ props.item.price.toLocaleString() }}원</small>
                 <!-- 상품 할인가 -->
-                <small class="real text-danger">{{ computedItemDiscountPrice }}</small>
+                <small class="real text-danger price-name">{{ computedItemDiscountPrice }}</small>
             </div>
          </div>
     </div>
@@ -66,18 +66,25 @@ const put = async () => {
 
 <style lang="scss" scoped>
 @font-face {
-    font-family: 'PyeojinGothic-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
-    font-weight: 700;
+    font-family: 'LeeSeoyun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 * {
-    font-family: 'PyeojinGothic-Bold';
+    font-family: 'LeeSeoyun';
 }
 .card {
   border-radius: 20px;
   overflow: hidden;
-
+.item-name {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+.price-name {
+  font-weight: 600;
+  font-size: 1.2em;
+}
   .img {
     display: inline-block;
     width: 100%;
